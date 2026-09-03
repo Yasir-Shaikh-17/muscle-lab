@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-teko: "Teko", sans-serif;
+  --color-background: #0A0A0A;
+  --color-surface: #111111;
+  --color-primary: #00FF99;
+  --color-text: #F5F5F5;
+  --color-muted: #A3A3A3;
+  --color-border: #1F1F1F;
+}
+
+*{
+  scroll-behavior: smooth;
+}
