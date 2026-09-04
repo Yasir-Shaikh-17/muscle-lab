@@ -22,42 +22,31 @@ const Problem = () => {
       type: "lines",
     });
 
-    gsap.from(splitedHeading.lines, {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: problemHeadingRef.current,
+        start: "top 90%",
+        end: "top 30%",
+        scrub: true,
+      },
+    });
+
+    tl.from(splitedHeading.lines, {
       opacity: 0,
       y: 30,
       duration: 1,
       ease: "power1.inOut",
       stagger: 0.3,
-      scrollTrigger: {
-        trigger: problemHeadingRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
     });
 
     // ====================== BOXES ANIMATION ======================
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: boxesContainerRef.current,
-          start: "top 95%", // starts fading in
-          end: "bottom 20%", // finishes fading out
-          scrub: true, // ties progress directly to scroll position, both directions
-        },
-      })
-      .fromTo(
-        boxesContainerRef.current,
-        { opacity: 0, scale: 0.95, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power1.inOut" },
-      )
-      .to(boxesContainerRef.current, {
-        opacity: 0,
-        scale: 0.95,
-        y: -30,
-        duration: 1,
-        ease: "power1.inOut",
-      });
-
+    tl.from(boxesContainerRef.current, {
+      opacity: 0,
+      yPercent: 30,
+      scale: 0.95,
+      ease: "power3.inOut",
+      duration: 1,
+    });
   });
 
   return (
@@ -68,7 +57,7 @@ const Problem = () => {
           ref={problemHeadingRef}
           className="text-8xl font-teko text-text text-center uppercase"
         >
-          YOUR BODY ISN'T PROBLEM<span className="text-primary">.</span> <br />{" "}
+          YOUR BODY ISN'T PROBLEM<span className="text-primary">.</span> <br />
           YOUR APPROACH IS<span className="text-primary">.</span>
         </h1>
       </div>

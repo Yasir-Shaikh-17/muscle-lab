@@ -6,7 +6,7 @@ import Solution from "./components/Solution";
 const App = () => {
   
   return (
-    <div className="overflow-hidden bg-background">
+    <div className=" bg-background">
       <Hero />
       <Problem />
       <Solution />
