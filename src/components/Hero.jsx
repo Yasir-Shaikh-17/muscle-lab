@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import arrow from "../assets/arrow_right.svg";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -6,11 +6,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+
 const Hero = () => {
   // ======================== REF DECLERATIONS ========================
   const heroHeadingRef = useRef();
   const heroButtonRef = useRef();
   const navbarRef = useRef();
+  const heroRef = useRef();
+  const heroHeadingButtonRef = useRef();
+
+  useEffect(() => {
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 500));
+    gsap.ticker.lagSmoothing(0);
+    return () => lenis.destroy();
+  }, []);
 
   // ======================== GSAP ANIMATION ========================
   useGSAP(() => {
@@ -19,6 +31,8 @@ const Hero = () => {
     const splitedHeading = SplitText.create(heroHeadingRef.current, {
       type: "lines",
     });
+
+    // ======================== INTRO ANIMATION ========================
 
     tl.from(".hero", {
       scale: 1.2,
@@ -61,6 +75,18 @@ const Hero = () => {
       },
       "<+0.3",
     );
+
+    // ======================== PARALLEX EFFECT ========================
+    gsap.to(heroHeadingButtonRef.current, {
+      yPercent: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
   });
 
   return (
@@ -95,13 +121,13 @@ const Hero = () => {
       </div>
 
       {/* MAIN CONTAINER */}
-      <div
-        id="hero"
-        className="h-svh relative overflow-hidden"
-      >
-
-        <div className="hero absolute h-full w-full bg-[url(/muscle_lab.jpg)] bg-cover bg-center bg-no-repeat" />
-        <div className="w-full h-full flex flex-col justify-end items-start gap-2 bg-gradient-to-r from-surface/40 to-transparent px-10 py-28">
+      <div id="hero" className="h-svh relative overflow-hidden">
+        <div
+          ref={heroRef}
+          className="hero absolute h-full w-full bg-[url(/muscle_lab.jpg)] bg-cover bg-center bg-no-repeat"
+        />
+        <div className="w-full h-full bg-gradient-to-r from-surface/40 to-transparent px-10 py-20">
+        <div ref={heroHeadingButtonRef} className="flex flex-col justify-end items-start gap-2 h-full">
           <h1
             ref={heroHeadingRef}
             className="text-text text-9xl uppercase font-teko leading-24"
@@ -116,6 +142,7 @@ const Hero = () => {
             Join Muscle Lab
             <img src={arrow} alt="arrow svg" className="h-6" />
           </button>
+        </div>
         </div>
       </div>
     </main>

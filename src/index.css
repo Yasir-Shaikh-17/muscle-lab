@@ -10,7 +10,3 @@
   --color-muted: #A3A3A3;
   --color-border: #1F1F1F;
 }
-
-*{
-  scroll-behavior: smooth;
-}

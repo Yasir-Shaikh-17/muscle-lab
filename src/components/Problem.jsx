@@ -26,7 +26,7 @@ const Problem = () => {
       opacity: 0,
       y: 30,
       duration: 1,
-      ease: "power1",
+      ease: "power1.inOut",
       stagger: 0.3,
       scrollTrigger: {
         trigger: problemHeadingRef.current,
@@ -35,31 +35,29 @@ const Problem = () => {
       },
     });
 
-    gsap.from(splitedPara.lines, {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: "power1",
-      stagger: 0.3,
-      scrollTrigger: {
-        trigger: problemParaRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
+    // ====================== BOXES ANIMATION ======================
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: boxesContainerRef.current,
+          start: "top 95%", // starts fading in
+          end: "bottom 20%", // finishes fading out
+          scrub: true, // ties progress directly to scroll position, both directions
+        },
+      })
+      .fromTo(
+        boxesContainerRef.current,
+        { opacity: 0, scale: 0.95, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power1.inOut" },
+      )
+      .to(boxesContainerRef.current, {
+        opacity: 0,
+        scale: 0.95,
+        y: -30,
+        duration: 1,
+        ease: "power1.inOut",
+      });
 
-    gsap.from(boxesContainerRef.current, {
-      opacity: 0,
-      scale: 0.95,
-      y: 30,
-      duration: 1.5,
-      ease: "power3.inOut",
-      scrollTrigger: {
-        trigger: boxesContainerRef.current,
-        toggleActions: "play none none reverse",
-        start: "top 80%",
-      },
-    });
   });
 
   return (
@@ -68,20 +66,11 @@ const Problem = () => {
       <div className="flex justify-center flex-col items-center gap-2">
         <h1
           ref={problemHeadingRef}
-          className="text-8xl font-teko text-text text-center"
+          className="text-8xl font-teko text-text text-center uppercase"
         >
-          YOUR BODY ISN'T CHANGING<span className="text-primary">.</span> <br />{" "}
+          YOUR BODY ISN'T PROBLEM<span className="text-primary">.</span> <br />{" "}
           YOUR APPROACH IS<span className="text-primary">.</span>
         </h1>
-
-        <p
-          ref={problemParaRef}
-          className="text-muted text-2xl text-center mx-14"
-        >
-          You show up. You put in the work. But without the right training,
-          consistency, and environment, your effort isn't translating into the
-          results you want.
-        </p>
       </div>
 
       {/* ============= PROBLEM BOXES ============= */}
@@ -94,7 +83,7 @@ const Problem = () => {
         shadow-[0px_0px_10px_white]/20"
         >
           <h2 className="text-text text-6xl font-teko uppercase">
-            <span className="text-primary">01</span> <br /> No Plan
+            <span className="text-[#FF474c]">01</span> <br /> No Plan
           </h2>
           <p className="text-muted text-xl">
             Walking into the gym without knowing what to train, how much to
@@ -107,7 +96,7 @@ const Problem = () => {
         shadow-[0px_0px_10px_white]/20"
         >
           <h2 className="text-text text-6xl font-teko uppercase">
-            <span className="text-primary">02</span> <br /> No PROGRESS
+            <span className="text-[#FF474c]">02</span> <br /> No PROGRESS
           </h2>
           <p className="text-muted text-xl">
             You're working hard, but your strength, physique, and performance
@@ -120,15 +109,13 @@ const Problem = () => {
         shadow-[0px_0px_10px_white]/20"
         >
           <h2 className="text-text text-6xl font-teko uppercase">
-            <span className="text-primary">03</span> <br /> NO PUSH
+            <span className="text-[#FF474c]">03</span> <br /> NO PUSH
           </h2>
           <p className="text-muted text-xl">
             It's easy to quit when nobody pushes you.
           </p>
         </div>
       </div>
-
-      <div className="h-svh"></div>
     </main>
   );
 };
