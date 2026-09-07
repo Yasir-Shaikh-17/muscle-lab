@@ -14,96 +14,100 @@ const Solution = () => {
   let paraRef = useRef();
   let headingContainerRef = useRef();
   let boxContainerRef = useRef();
+  let transparentContainerRef = useRef();
   let boxOneRef = useRef();
   let boxTwoRef = useRef();
   let boxThreeRef = useRef();
-  let mainContainerRef = useRef();
 
   // ================ GSAP ANIMATIONS ================
-  useGSAP(
-    () => {
-      let splitedHeading = SplitText.create(headingRef.current, {
-        type: "lines",
-      });
+  useGSAP(() => {
+    // ================ HEADING ANIMATIONS ================
+    let splitedHeading = SplitText.create(headingRef.current, {
+      type: "lines",
+    });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: "top 80%",
-          end: "top 30%",
-          scrub: true,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 80%",
+        end: "top 30%",
+        scrub: true,
+      },
+    });
+
+    tl.from(splitedHeading.lines, {
+      opacity: 0,
+      yPercent: 30,
+      stagger: 0.3,
+      duration: 1,
+      ease: "power2.out",
+    }).from(paraRef.current, {
+      opacity: 0,
+      yPercent: 30,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    // ================ BOXES ANIMATIONS ================
+
+    // ================ BOXES ANIMATIONS ================
+
+    // 1. BOXES ENTER BEFORE PIN
+    const boxEntrance = gsap.timeline({
+      scrollTrigger: {
+        trigger: transparentContainerRef.current,
+        start: "top 130%",
+        end: "+=330%",
+        scrub: 2,
+      },
+    });
+
+    boxEntrance
+      .fromTo(
+        boxOneRef.current,
+        {
+          xPercent: 110,
+          yPercent: 110,
         },
-      });
-
-      tl.from(splitedHeading.lines, {
-        opacity: 0,
-        yPercent: 30,
-        stagger: 0.3,
-        duration: 1,
-        ease: "power2.out",
-      }).from(paraRef.current, {
-        opacity: 0,
-        yPercent: 30,
-        duration: 1,
-        ease: "power2.out",
-      });
-
-      gsap.set(boxOneRef.current, {
-        xPercent: 105,
-        yPercent: 105,
-      });
-
-      gsap.set(boxTwoRef.current, {
-        xPercent: 105,
-        yPercent: 105,
-      });
-
-      gsap.set(boxThreeRef.current, {
-        xPercent: 105,
-        yPercent: 105,
-      });
-
-      const boxesTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: boxContainerRef.current,
-          start: "top 0%",
-          end: "+=800%",
-          pin: true,
-          scrub: 0.5,
-          markers: true,
-          invalidateOnRefresh: true,
+        {
+          xPercent: 0,
+          yPercent: 0,
+          ease: "none",
         },
-      });
-
-      boxesTl
-        // BOX 1
-        .to(boxOneRef.current, {
-          xPercent: 0,
-          yPercent: 0,
-          duration: 1,
+      )
+      .fromTo(
+        boxTwoRef.current,
+        {
+          xPercent: 110,
+          yPercent: 110,
+        },
+        {
+          xPercent: 1.5,
+          yPercent: 1.5,
           ease: "none",
-        })
-
-        // BOX 2
-        .to(boxTwoRef.current, {
-          xPercent: 0,
-          yPercent: 0,
-          duration: 1,
+        },
+      )
+      .fromTo(
+        boxThreeRef.current,
+        {
+          xPercent: 110,
+          yPercent: 110,
+        },
+        {
+          xPercent: 3,
+          yPercent: 3,
           ease: "none",
-        })
+        },
+      );
 
-        // BOX 3
-        .to(boxThreeRef.current, {
-          xPercent: 0,
-          yPercent: 0,
-          duration: 1,
-          ease: "none",
-        });
-
-      ScrollTrigger.refresh();
-    },
-    { scope: mainContainerRef },
-  );
+    // 2. PIN STARTS WHEN SECTION REACHES TOP
+    ScrollTrigger.create({
+      trigger: transparentContainerRef.current,
+      start: "top top",
+      end: "+=250%",
+      pin: true,
+    });
+  }, []);
 
   useEffect(() => {
     document.fonts.ready.then(() => {
@@ -112,10 +116,7 @@ const Solution = () => {
   }, []);
 
   return (
-    <main
-      ref={mainContainerRef}
-      className="flex flex-col items-center gap-10 w-full"
-    >
+    <main className="flex flex-col items-center gap-10 w-full">
       {/* =============== HEADING =============== */}
       <div
         ref={headingContainerRef}
@@ -132,30 +133,106 @@ const Solution = () => {
         <p ref={paraRef} className="text-3xl text-muted text-center px-10">
           <span className="text-primary font-semibold">Muscle Lab</span> gives
           you a personalized plan, a coach who tracks your progress, and a
-          program built to push you further than you'd go alone.
+          program built to push you further than you'd go alone
+          <span className="text-primary">.</span>
         </p>
       </div>
 
       {/* =============== SOLUTION WITH IMAGES =============== */}
-      <div
-        ref={boxContainerRef}
-        className="solutionBoxContainer bg-purple-400 overflow-hidden w-full h-svh flex flex-col justify-center items-center relative"
-      >
+      <div ref={boxContainerRef} className="solutionBoxContainer w-full">
         <div
-          ref={boxOneRef}
-          className="box1 h-[80svh] w-[90svw] bg-red-200 shrink-0 absolute z-10"
-        ></div>
-        <div
-          ref={boxTwoRef}
-          className="box1 h-[80svh] w-[90svw] bg-red-400 shrink-0 absolute z-20"
-        ></div>
-        <div
-          ref={boxThreeRef}
-          className="box1 h-[80svh] w-[90svw] bg-red-600 shrink-0 absolute z-30"
-        ></div>
-      </div>
+          ref={transparentContainerRef}
+          className="relative flex flex-col items-center h-svh justify-center overflow-hidden pt-10"
+        >
+          {/* CARD 1 */}
+          <div
+            ref={boxOneRef}
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
+          >
+            {/* LEFT */}
+            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
+              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
+                01
+              </h1>
+              <div>
+                <h2 className="text-6xl text-white uppercase font-bold">
+                  Structured Workouts
+                </h2>
+                <h3 className="text-4xl text-white capitalize">
+                  Know exactly what to do<span className="text-primary">.</span>
+                </h3>
+              </div>
+              <p className="text-xl text-muted">
+                Follow structured workouts built around your goals, with the
+                right exercises, sets, reps, and progression
+                <span className="text-primary">.</span>
+              </p>
+            </div>
+            {/* RIGHT */}
+            <div className="right h-full">
+              <img src={man1} alt="man 1" className="h-full" />
+            </div>
+          </div>
 
-      {/* <div className="h-[400svh]"></div> */}
+          {/* CARD 2 */}
+          <div
+            ref={boxTwoRef}
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
+          >
+            {/* LEFT */}
+            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
+              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
+                02
+              </h1>
+              <div>
+                <h2 className="text-6xl text-white uppercase font-bold">
+                  Track Your Progress
+                </h2>
+                <h3 className="text-4xl text-white capitalize">
+                  See yourself getting stronger
+                  <span className="text-primary">.</span>
+                </h3>
+              </div>
+              <p className="text-xl text-muted">
+                Track your workouts, monitor your progress, and know when it's
+                time to push harder<span className="text-primary">.</span>
+              </p>
+            </div>
+            {/* RIGHT */}
+            <div className="right h-full">
+              <img src={girl1} alt="man 1" className="h-full" />
+            </div>
+          </div>
+
+          {/* CARD 3 */}
+          <div
+            ref={boxThreeRef}
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 ">
+            {/* LEFT */}
+            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
+              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
+                03
+              </h1>
+              <div>
+                <h2 className="text-6xl text-white uppercase font-bold">
+                  Stay Accountable
+                </h2>
+                <h3 className="text-4xl text-white capitalize">
+                  Don't train alone<span className="text-primary">.</span>
+                </h3>
+              </div>
+              <p className="text-xl text-muted">
+                Stay accountable, build consistency, and get the push you need
+                to keep showing up<span className="text-primary">.</span>
+              </p>
+            </div>
+            {/* RIGHT */}
+            <div className="right h-full">
+              <img src={man2} alt="man 1" className="h-full" />
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };

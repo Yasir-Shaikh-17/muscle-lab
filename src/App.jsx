@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "./components/Hero";
 import Problem from "./components/Problem";
 import Solution from "./components/Solution";
+import Testinomial from "./components/Testinomial";
 
 const App = () => {
   
@@ -10,6 +11,7 @@ const App = () => {
       <Hero />
       <Problem />
       <Solution />
+      <Testinomial />
     </div>
   );
 };
