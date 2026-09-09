@@ -1,6 +1,61 @@
-import React from "react";
+import React, { useRef } from "react";
+import amir from "../assets/amir.jpg";
+import asfan from "../assets/asfan.jpg";
+import wassay from "../assets/wassay.jpg";
+import qureshi from "../assets/qureshi.jpg";
+import star from "../assets/star.svg";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Testinomial = () => {
+  const trackRef = useRef(null);
+
+  useGSAP(() => {
+    const track = trackRef.current;
+
+    gsap.to(track, {
+      x: -(track.scrollWidth / 2),
+      duration: 30,
+      ease: "none",
+      repeat: -1,
+    });
+  }, []);
+
+  const testimonials = [
+    {
+      name: "Asfan",
+      tag: "Beginner",
+      review:
+        "MuscleLab gave me a proper plan to follow. I finally know what to train and how to improve every week.",
+      rating: 5,
+      image: asfan,
+    },
+    {
+      name: "Wassay",
+      tag: "Member",
+      review:
+        "Tracking my progress with MuscleLab keeps me motivated. I can actually see the difference in my strength.",
+      rating: 4,
+      image: wassay,
+    },
+    {
+      name: "Amir",
+      tag: "Member",
+      review:
+        "The accountability makes a huge difference. I’m more consistent with my workouts and don’t feel lost at the gym anymore.",
+      rating: 5,
+      image: amir,
+    },
+    {
+      name: "Qureshi",
+      tag: "Intermediate",
+      review:
+        "MuscleLab makes it much easier to stay consistent. Having everything in one place keeps me focused on my goals.",
+      rating: 5,
+      image: qureshi,
+    },
+  ];
+
   return (
     <main className="flex flex-col gap-10">
       {/* HEAING */}
@@ -16,10 +71,48 @@ const Testinomial = () => {
 
       {/* CARDS */}
       <div className="cardContainer flex justify-evenly items-center">
+        <div className="overflow-hidden">
+          <div ref={trackRef} className="testimonial-track flex w-max">
+            {[...testimonials, ...testimonials].map((e, ind) => (
+              <div
+                key={ind}
+                className="w-87.5 shrink-0 rounded-lg bg-surface/90 backdrop-blur-md border border-primary/20 mr-6 px-3 py-4 flex flex-col justify-evenly min-h-60 gap-4"
+              >
+                {/* RATING STARS */}
+                <div className="star-rating flex">
+                  {Array.from({ length: e.rating }).map((_, index) => (
+                    <img
+                      key={index}
+                      src={star}
+                      alt="star"
+                      className="w-5 h-5"
+                    />
+                  ))}
+                </div>
 
-        <div className="card1 bg-[url(/asfan.jpg)] bg-cover bg-center bg-no-repeat h-120 w-60"></div>
-        <div className="card1 bg-[url(/amir.jpg)] bg-cover bg-center bg-no-repeat h-120 w-60"></div>
+                {/* REVIEW */}
+                <div>
+                  <p className="text-white text-lg">{e.review}</p>
+                </div>
 
+                {/* NAME AND IMAGE */}
+                <div className="flex items-center gap-2">
+                  <div>
+                    <img
+                      src={e.image}
+                      alt={e.name}
+                      className="h-16 w-16 rounded-full object-cover object-center"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-primary text-lg">{e.name}</h3>
+                    <p className="text-sm text-muted">{e.tag}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );

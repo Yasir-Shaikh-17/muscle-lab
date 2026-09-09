@@ -12,6 +12,7 @@ const App = () => {
       <Problem />
       <Solution />
       <Testinomial />
+      <div className="h-svh"></div>
     </div>
   );
 };

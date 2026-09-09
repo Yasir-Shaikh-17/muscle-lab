@@ -147,7 +147,7 @@ const Solution = () => {
           {/* CARD 1 */}
           <div
             ref={boxOneRef}
-            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5"
           >
             {/* LEFT */}
             <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
@@ -177,7 +177,7 @@ const Solution = () => {
           {/* CARD 2 */}
           <div
             ref={boxTwoRef}
-            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
           >
             {/* LEFT */}
             <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
@@ -207,7 +207,7 @@ const Solution = () => {
           {/* CARD 3 */}
           <div
             ref={boxThreeRef}
-            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-primary/20 shadow-primary/5 ">
+            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 ">
             {/* LEFT */}
             <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
               <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
