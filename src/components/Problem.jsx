@@ -68,11 +68,11 @@ const Problem = () => {
       {/* ============= PROBLEM BOXES ============= */}
       <div
         ref={boxesContainerRef}
-        className="boxesContainer flex flex-col gap-6 lg:flex-row justify-evenly items-center px-8"
+        className="boxesContainer flex flex-col gap-6 lg:flex-row justify-center items-center px-8"
       >
-        <div className="box1 bg-surface w-full md:w-2/3  lg:w-1/4 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
-        shadow-[0px_0px_10px_white]/20 min-h-60">
-          <h2 className="text-text text-3xl  md:text-6xl font-teko uppercase">
+        <div className="box1 bg-surface w-full sm:w-2/3  lg:w-1/3 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
+        shadow-[0px_0px_10px_white]/20 lg:min-h-72">
+          <h2 className="text-text text-4xl lg:text-5xl xl:text-6xl font-teko uppercase">
             <span className="text-[#FF474c]">01</span> <br /> No Plan
           </h2>
           <p className="text-muted text-lg md:text-xl">
@@ -82,9 +82,9 @@ const Problem = () => {
         </div>
 
         <div
-          className="box2 bg-surface w-full m  md:w-2/3 lg:w-1/4 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
-        shadow-[0px_0px_10px_white]/20 min-h-60">
-          <h2 className="text-text text-3xl  md:text-6xl font-teko uppercase">
+          className="box2 bg-surface w-full m  sm:w-2/3 lg:w-1/3 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
+        shadow-[0px_0px_10px_white]/20 lg:min-h-72">
+          <h2 className="text-text text-4xl lg:text-5xl xl:text-6xl font-teko uppercase">
             <span className="text-[#FF474c]">02</span> <br /> No PROGRESS
           </h2>
           <p className="text-muted text-lg md:text-xl">
@@ -94,9 +94,9 @@ const Problem = () => {
         </div>
 
         <div
-          className="box3 bg-surface w-full m  md:w-2/3 lg:w-1/4 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
-        shadow-[0px_0px_10px_white]/20 min-h-60">
-          <h2 className="text-text text-3xl  md:text-6xl font-teko uppercase">
+          className="box3 bg-surface w-full m  sm:w-2/3 lg:w-1/3 px-4 py-8 rounded-lg flex flex-col gap-2 md:gap-4 
+        shadow-[0px_0px_10px_white]/20 lg:min-h-72">
+          <h2 className="text-text text-4xl lg:text-5xl xl:text-6xl font-teko uppercase">
             <span className="text-[#FF474c]">03</span> <br /> NO PUSH
           </h2>
           <p className="text-muted text-lg md:text-xl">

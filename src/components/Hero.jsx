@@ -136,7 +136,7 @@ const Hero = () => {
 
         <div ref={heroRef} className="hero absolute h-full w-full bg-[url(/muscle_lab.jpg)] bg-cover bg-center bg-no-repeat"/>
 
-        <div className="w-full h-full z-10 relative bg-linear-to-r from-surface/30 to-transparent px-2 sm:px-10 py-16">
+        <div className="w-full h-full z-10 relative bg-linear-to-t sm:bg-linear-to-r from-surface/30 to-transparent px-2 sm:px-10 py-16">
 
           <div ref={heroHeadingButtonRef} className="flex flex-col justify-end items-center sm:items-start gap-1 sm:gap-0 h-full">
             
