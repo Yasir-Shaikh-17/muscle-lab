@@ -56,8 +56,8 @@ const Solution = () => {
     const boxEntrance = gsap.timeline({
       scrollTrigger: {
         trigger: transparentContainerRef.current,
-        start: "top 130%",
-        end: "+=330%",
+        start: "top 140%",
+        end: "+=340%",
         scrub: 2,
       },
     });

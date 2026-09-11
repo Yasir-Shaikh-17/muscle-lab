@@ -57,8 +57,8 @@ const Testinomial = () => {
   ];
 
   return (
-    <main className="flex flex-col gap-10">
-      {/* HEAING */}
+    <main className="flex flex-col gap-14 py-16">
+      {/* HEADING */}
       <div className="flex flex-col justify-center items-center gap-3">
         <h1 className="text-8xl font-teko text-text text-center uppercase leading-20">
           REAL PEOPLE<span className="text-primary">.</span> REAL PROGRESS
@@ -71,7 +71,10 @@ const Testinomial = () => {
 
       {/* CARDS */}
       <div className="cardContainer flex justify-evenly items-center">
-        <div className="overflow-hidden">
+        <div className="overflow-hidden w-full relative">
+          <div className="pointer-events-none absolute inset-0 z-10 
+          bg-[linear-gradient(to_right,rgba(0,0,0,0.8)_0%,transparent_30%,transparent_70%,rgba(0,0,0,0.8)_100%)]"/>
+
           <div ref={trackRef} className="testimonial-track flex w-max">
             {[...testimonials, ...testimonials].map((e, ind) => (
               <div
@@ -114,6 +117,7 @@ const Testinomial = () => {
           </div>
         </div>
       </div>
+      
     </main>
   );
 };
