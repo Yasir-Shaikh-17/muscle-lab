@@ -55,7 +55,7 @@ const Membership = () => {
   ];
 
   return (
-    <main className="flex flex-col gap-6">
+    <main className="flex flex-col gap-10">
       {/* HEADING */}
       <div className="flex flex-col items-center">
         <h1 className="text-4xl sm:text-6xl lg:text-8xl font-teko text-text uppercase">
@@ -73,7 +73,7 @@ const Membership = () => {
         {/* CARD */}
         {plans.map((e, ind) => {
           return (
-            <div className={`card h-120 w-[28%] border ${e.popular? "border-primary": "border-border"} py-10 px-4 flex flex-col justify-around rounded-xl relative ${e.popular ? "bg-linear-to-t from-primary/20 to-transparent": "bg-surface" } ${e.popular?"scale-105": ""}`}>
+            <div className={`card h-120 w-[28%] border ${e.popular? "border-primary/40": "border-border"} py-10 px-4 flex flex-col justify-around rounded-xl relative ${e.popular ? "bg-linear-to-t from-primary/20 to-transparent": "bg-surface" } ${e.popular?"scale-105": ""}`}>
               {/* POPULAR */}
               {e.popular ? (
                 <div className="popular flex items-center justify-center gap-1 absolute left-0 top-2 w-full">
