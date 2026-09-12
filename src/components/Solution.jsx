@@ -118,8 +118,32 @@ const Solution = () => {
     });
   }, []);
 
+  const cards = [
+    {
+      ref: boxOneRef,
+      heading: "Structured Workouts",
+      subHeading: <>Know exactly what to do<span className="text-primary">.</span></>,
+      para: <>Follow structured workouts built around your goals, with the right exercises, sets, reps, and progression<span className="text-primary">.</span></>,
+      img: man1,
+    },
+    {
+      ref: boxTwoRef,
+      heading: "Track Your Progress",
+      subHeading: <>See yourself getting stronger<span className="text-primary">.</span></>,
+      para: <>Track your workouts, monitor your progress, and know when it's time to push harder<span className="text-primary">.</span></>,
+      img: girl1,
+    },
+    {
+      ref: boxThreeRef,
+      heading: "Stay Accountable",
+      subHeading: <>Don't train alone<span className="text-primary">.</span></>,
+      para: <>Stay accountable, build consistency, and get the push you need to keep showing up<span className="text-primary">.</span></>,
+      img: man2,
+    },
+  ];
+
   return (
-    <main className="flex flex-col items-center lg:gap-10 w-full">
+    <main className="flex flex-col items-center lg:gap-10 w-full transition-all duration-200">
       {/* =============== HEADING =============== */}
       <div
         ref={headingContainerRef}
@@ -133,7 +157,10 @@ const Solution = () => {
           <br />
           Here's the fix<span className="text-primary">.</span>
         </h1>
-        <p ref={paraRef} className=" leading-tight sm:text-2xl lg:text-3xl text-muted text-center px-4 sm:px-10">
+        <p
+          ref={paraRef}
+          className=" leading-tight sm:text-2xl lg:text-3xl text-muted text-center px-4 sm:px-10"
+        >
           <span className="text-primary font-semibold">Muscle Lab</span> gives
           you a personalized plan, a coach who tracks your progress, and a
           program built to push you further than you'd go alone
@@ -145,96 +172,40 @@ const Solution = () => {
       <div ref={boxContainerRef} className="solutionBoxContainer w-full">
         <div
           ref={transparentContainerRef}
-          className="relative flex flex-col items-center h-svh justify-center overflow-hidden lg:pt-10"
-        >
-          {/* CARD 1 */}
-          <div
-            ref={boxOneRef}
-            className="box1 absolute z-10 lg:h-[80svh] lg:w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5"
-          >
-            {/* LEFT */}
-            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
-              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
-                01
-              </h1>
-              <div>
-                <h2 className="text-6xl text-white uppercase font-bold">
-                  Structured Workouts
-                </h2>
-                <h3 className="text-4xl text-white capitalize">
-                  Know exactly what to do<span className="text-primary">.</span>
-                </h3>
-              </div>
-              <p className="text-xl text-muted">
-                Follow structured workouts built around your goals, with the
-                right exercises, sets, reps, and progression
-                <span className="text-primary">.</span>
-              </p>
-            </div>
-            {/* RIGHT */}
-            <div className="right h-full">
-              <img src={man1} alt="man 1" className="h-full" />
-            </div>
-          </div>
+          className="lg:relative flex flex-col gap-4 items-center lg:h-svh justify-center overflow-hidden lg:pt-10 px-4 py-4">
 
-          {/* CARD 2 */}
-          <div
-            ref={boxTwoRef}
-            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
-          >
-            {/* LEFT */}
-            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
-              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
-                02
-              </h1>
-              <div>
-                <h2 className="text-6xl text-white uppercase font-bold">
-                  Track Your Progress
-                </h2>
-                <h3 className="text-4xl text-white capitalize">
-                  See yourself getting stronger
-                  <span className="text-primary">.</span>
-                </h3>
+          {/* CARDS */}
+          {cards.map((e, ind) => {
+            return (
+              <div
+                key={ind}
+                ref={e.ref}
+                className="box1 lg:absolute lg:z-10 h-[70svh] lg:h-[80svh] w-[90svw] md:w-[60svw] lg:w-[90svw] shrink-0 flex flex-col lg:flex-row lg:gap-8 lg:p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 p-4"
+              >
+                {/* LEFT */}
+                <div className="left h-1/2 lg:h-full w-full lg:w-2/3 flex flex-col justify-center lg:pr-10 gap-2 md:gap-4">
+                  <h1 className="text-primary text-8xl font-bold font-teko leading-10 md:leading-20 lg:absolute lg:top-0 lg:left-0 lg:m-10">
+                    0{ind+1}
+                  </h1>
+                  <div className="md:block flex flex-col gap-0">
+                    <h2 className="text-2xl md:text-4xl lg:text-6xl text-white uppercase font-bold leading-tight">
+                      {e.heading}
+                    </h2>
+                    <h3 className="text-xl md:text-2xl lg:text-4xl text-white capitalize leading-tight">
+                      {e.subHeading}
+                    </h3>
+                  </div>
+                  <p className="leading-tight text-lg md:text-xl text-muted">
+                    {e.para}
+                  </p>
+                </div>
+                {/* RIGHT */}
+                <div className="right h-1/2 w-full lg:w-fit lg:h-full bg-green-900">
+                  <img src={e.img} alt="man 1" className="object-cover object-center h-full w-full" />
+                </div>
               </div>
-              <p className="text-xl text-muted">
-                Track your workouts, monitor your progress, and know when it's
-                time to push harder<span className="text-primary">.</span>
-              </p>
-            </div>
-            {/* RIGHT */}
-            <div className="right h-full">
-              <img src={girl1} alt="man 1" className="h-full" />
-            </div>
-          </div>
-
-          {/* CARD 3 */}
-          <div
-            ref={boxThreeRef}
-            className="box1 absolute z-10 h-[80svh] w-[90svw] shrink-0 flex gap-8 p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 "
-          >
-            {/* LEFT */}
-            <div className="left h-full w-2/3 flex flex-col justify-center pr-10 gap-4">
-              <h1 className="text-primary text-8xl font-bold font-teko leading-20 absolute top-0 left-0 m-10">
-                03
-              </h1>
-              <div>
-                <h2 className="text-6xl text-white uppercase font-bold">
-                  Stay Accountable
-                </h2>
-                <h3 className="text-4xl text-white capitalize">
-                  Don't train alone<span className="text-primary">.</span>
-                </h3>
-              </div>
-              <p className="text-xl text-muted">
-                Stay accountable, build consistency, and get the push you need
-                to keep showing up<span className="text-primary">.</span>
-              </p>
-            </div>
-            {/* RIGHT */}
-            <div className="right h-full">
-              <img src={man2} alt="man 1" className="h-full" />
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </main>

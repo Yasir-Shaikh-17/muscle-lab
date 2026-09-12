@@ -6,15 +6,65 @@ import qureshi from "../assets/qureshi.jpg";
 import star from "../assets/star.svg";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Testinomial = () => {
   const trackRef = useRef(null);
+  const headingContainerRef = useRef();
+  const headingRef = useRef();
+  const subHeadingRef = useRef();
+
+  let mm = gsap.matchMedia();
+
+  mm.add("(min-width: 1024px)", () => {
+    useGSAP(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: headingContainerRef.current,
+          start: "top 95%",
+          end: "top 50%",
+          scrub: true,
+        },
+      });
+
+      tl.from(headingRef.current, {
+        opacity: 0,
+        yPercent: 30,
+      });
+
+      tl.from(subHeadingRef.current, {
+        opacity: 0,
+        yPercent: 30,
+      });
+
+      const track = trackRef.current;
+      if (!track) return;
+      const cards = track.children;
+      const firstDuplicate = cards[testimonials.length];
+      // Exact distance between original set and duplicated set
+      const distance = firstDuplicate.offsetLeft - cards[0].offsetLeft;
+
+      gsap.to(track, {
+        x: -distance,
+        duration: 30,
+        ease: "none",
+        repeat: -1,
+      });
+    }, []);
+  });
 
   useGSAP(() => {
     const track = trackRef.current;
+    if (!track) return;
+    const cards = track.children;
+    const firstDuplicate = cards[testimonials.length];
+    // Exact distance between original set and duplicated set
+    const distance = firstDuplicate.offsetLeft - cards[0].offsetLeft;
 
     gsap.to(track, {
-      x: -(track.scrollWidth / 2),
+      x: -distance,
       duration: 30,
       ease: "none",
       repeat: -1,
@@ -57,14 +107,23 @@ const Testinomial = () => {
   ];
 
   return (
-    <main className="flex flex-col gap-14 py-16">
+    <main className="flex flex-col gap-4 sm:gap-14 py-16">
       {/* HEADING */}
-      <div className="flex flex-col justify-center items-center gap-3">
-        <h1 className="text-8xl font-teko text-text text-center uppercase leading-20">
+      <div
+        ref={headingContainerRef}
+        className="flex flex-col justify-center items-center sm:gap-3"
+      >
+        <h1
+          ref={headingRef}
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-teko text-text text-center uppercase lg:leading-20"
+        >
           REAL PEOPLE<span className="text-primary">.</span> REAL PROGRESS
           <span className="text-primary">.</span>
         </h1>
-        <h3 className="text-6xl font-teko text-center text-text uppercase">
+        <h3
+          ref={subHeadingRef}
+          className="text-xl sm:text-2xl md:text-4xl lg:text-6xl font-teko text-center text-text uppercase"
+        >
           Don't take our word for it<span className="text-primary">.</span>
         </h3>
       </div>
@@ -72,14 +131,16 @@ const Testinomial = () => {
       {/* CARDS */}
       <div className="cardContainer flex justify-evenly items-center">
         <div className="overflow-hidden w-full relative">
-          <div className="pointer-events-none absolute inset-0 z-10 
-          bg-[linear-gradient(to_right,rgba(0,0,0,0.8)_0%,transparent_30%,transparent_70%,rgba(0,0,0,0.8)_100%)]"/>
+          <div
+            className="pointer-events-none absolute inset-0 z-10 
+          bg-[linear-gradient(to_right,rgba(0,0,0,0.8)_0%,transparent_30%,transparent_70%,rgba(0,0,0,0.8)_100%)]"
+          />
 
           <div ref={trackRef} className="testimonial-track flex w-max">
             {[...testimonials, ...testimonials].map((e, ind) => (
               <div
                 key={ind}
-                className="w-87.5 shrink-0 rounded-lg bg-surface/90 backdrop-blur-md border border-primary/20 mr-6 px-3 py-4 flex flex-col justify-evenly min-h-60 gap-4"
+                className="w-72 sm:w-87.5 shrink-0 rounded-lg bg-surface/90 backdrop-blur-md border border-primary/20 mr-6 px-3 py-4 flex flex-col justify-evenly min-h-48 sm:min-h-60 gap-2 sm:gap-4"
               >
                 {/* RATING STARS */}
                 <div className="star-rating flex">
@@ -88,14 +149,14 @@ const Testinomial = () => {
                       key={index}
                       src={star}
                       alt="star"
-                      className="w-5 h-5"
+                      className="sm:w-5 sm:h-5 h-3 w-3"
                     />
                   ))}
                 </div>
 
                 {/* REVIEW */}
                 <div>
-                  <p className="text-white text-lg">{e.review}</p>
+                  <p className="text-white text-sm sm:text-lg">{e.review}</p>
                 </div>
 
                 {/* NAME AND IMAGE */}
@@ -104,7 +165,7 @@ const Testinomial = () => {
                     <img
                       src={e.image}
                       alt={e.name}
-                      className="h-16 w-16 rounded-full object-cover object-center"
+                      className="sm:h-16 sm:w-16 h-10 w-10 rounded-full object-cover object-center"
                     />
                   </div>
                   <div>
@@ -117,7 +178,6 @@ const Testinomial = () => {
           </div>
         </div>
       </div>
-      
     </main>
   );
 };

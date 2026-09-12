@@ -11,8 +11,8 @@ const App = () => {
       <Hero />
       <Problem />
       <Solution />
-      {/* <Testinomial />
-      <Benefits /> */}
+      <Testinomial />
+      {/* <Benefits /> */}
       <div className="h-svh"></div>
     </div>
   );
