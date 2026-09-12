@@ -180,11 +180,11 @@ const Solution = () => {
               <div
                 key={ind}
                 ref={e.ref}
-                className="box1 lg:absolute lg:z-10 h-[70svh] lg:h-[80svh] w-[90svw] md:w-[60svw] lg:w-[90svw] shrink-0 flex flex-col lg:flex-row lg:gap-8 lg:p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 p-4"
+                className="box1 lg:absolute lg:z-10 h-[60svh] sm:h-[70svh] lg:h-[80svh] w-[90svw] md:w-[60svw] lg:w-[90svw] shrink-0 flex flex-col lg:flex-row lg:gap-8 lg:p-10 rounded-2xl bg-surface/90 backdrop-blur-md border border-primary/20 shadow-primary/5 p-4"
               >
                 {/* LEFT */}
                 <div className="left h-1/2 lg:h-full w-full lg:w-2/3 flex flex-col justify-center lg:pr-10 gap-2 md:gap-4">
-                  <h1 className="text-primary text-8xl font-bold font-teko leading-10 md:leading-20 lg:absolute lg:top-0 lg:left-0 lg:m-10">
+                  <h1 className="text-primary text-6xl sm:text-8xl font-bold font-teko leading-10 md:leading-20 lg:absolute lg:top-0 lg:left-0 lg:m-10">
                     0{ind+1}
                   </h1>
                   <div className="md:block flex flex-col gap-0">
@@ -195,7 +195,7 @@ const Solution = () => {
                       {e.subHeading}
                     </h3>
                   </div>
-                  <p className="leading-tight text-lg md:text-xl text-muted">
+                  <p className="leading-tight sm:text-lg md:text-xl text-muted">
                     {e.para}
                   </p>
                 </div>

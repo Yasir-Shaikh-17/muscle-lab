@@ -55,7 +55,7 @@ const Membership = () => {
   ];
 
   return (
-    <main className="flex flex-col gap-10">
+    <main className="flex flex-col gap-4 sm:gap-10">
       {/* HEADING */}
       <div className="flex flex-col items-center">
         <h1 className="text-4xl sm:text-6xl lg:text-8xl font-teko text-text uppercase">
@@ -69,11 +69,11 @@ const Membership = () => {
       </div>
 
       {/* CARD CONTAINER */}
-      <div className="cardContainer flex justify-evenly items-center w-full">
+      <div className="cardContainer flex flex-col gap-8 lg:gap-0 lg:flex-row lg:justify-evenly items-center w-full px-8 sm:px-0">
         {/* CARD */}
         {plans.map((e, ind) => {
           return (
-            <div className={`card h-120 w-[28%] border ${e.popular? "border-primary/40": "border-border"} py-10 px-4 flex flex-col justify-around rounded-xl relative ${e.popular ? "bg-linear-to-t from-primary/20 to-transparent": "bg-surface" } ${e.popular?"scale-105": ""}`}>
+            <div key={ind} className={`card h-100 sm:h-120 w-full sm:w-[60%] lg:w-[28%] border ${e.popular? "border-primary/40": "border-border"} py-10 px-4 flex flex-col justify-around rounded-xl relative ${e.popular ? "bg-linear-to-t from-primary/20 to-transparent": "bg-surface" } ${e.popular?"scale-105": ""} hover:shadow-lg hover:shadow-primary/20 transition duration-200`}>
               {/* POPULAR */}
               {e.popular ? (
                 <div className="popular flex items-center justify-center gap-1 absolute left-0 top-2 w-full">
@@ -86,18 +86,18 @@ const Membership = () => {
 
               {/* NAME */}
               <div className="name flex justify-center">
-                <h1 className="uppercase text-6xl text-text font-teko">
+                <h1 className="uppercase text-4xl sm:text-6xl text-text font-teko">
                   {e.name}
                 </h1>
               </div>
 
               {/* PRICE */}
               <div className="price">
-                <h2 className="text-3xl text-text uppercase font-bold">
+                <h2 className="text-xl sm:text-3xl text-text uppercase font-bold">
                   pkr {e.price}
                 </h2>
                 <div className="flex gap-1 items-center">
-                  <h4 className="text-xl text-text uppercase font-bold">
+                  <h4 className="text-base sm:text-xl text-text uppercase font-bold">
                     / {e.duration}
                   </h4>
                   <p className="text-primary text-sm font-semibold">
@@ -111,9 +111,9 @@ const Membership = () => {
                 <ul className="my-2 flex flex-col gap-1">
                   {e.features.map((e, ind) => {
                     return (
-                      <li className="flex items-center gap-2">
-                        <img src={e.included? check : cross} alt="check" className="h-4" />
-                        <p className="text-text text-lg font-semibold">{e.name}</p>
+                      <li key={ind} className="flex items-center gap-2">
+                        <img src={e.included? check : cross} alt="check" className="h-3 sm:h-4" />
+                        <p className="text-text sm:text-lg font-semibold">{e.name}</p>
                       </li>
                     );
                   })}
@@ -122,7 +122,7 @@ const Membership = () => {
 
               {/* BUTTON */}
               <div className="flex justify-center">
-                <button className="w-2/3 bg-primary text-surface py-2 rounded-full text-2xl font-semibold uppercase">
+                <button className="w-2/3 bg-primary text-surface py-1.5 sm:py-2 rounded-full sm:text-2xl font-semibold uppercase cursor-pointer">
                   {e.buttonText}
                 </button>
               </div>
