@@ -4,6 +4,7 @@ import Problem from "./components/Problem";
 import Solution from "./components/Solution";
 import Testinomial from "./components/Testinomial";
 import Benefits from "./components/Benefits";
+import Membership from "./components/Membership";
 
 const App = () => {
   return (
@@ -12,7 +13,8 @@ const App = () => {
       <Problem />
       <Solution />
       <Testinomial />
-      {/* <Benefits /> */}
+      <Benefits />
+      <Membership />
       <div className="h-svh"></div>
     </div>
   );
