@@ -6,6 +6,8 @@ import Testinomial from "./components/Testinomial";
 import Benefits from "./components/Benefits";
 import Membership from "./components/Membership";
 import Cta from "./components/Cta";
+import Faq from "./components/Faq";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -16,7 +18,8 @@ const App = () => {
       <Testinomial />
       <Membership />
       <Cta />
-      <div className="h-svh"></div>
+      <Faq />
+      <Footer />
     </div>
   );
 };
